@@ -28,19 +28,18 @@
 #define FIRST_TIME_H 1
 
 
-/** \brief Bit fields in the returned error code */
+/** Bit fields in the returned status code */
 enum ftc_status {
-    FTC_ERROR_STEP_01 = 1 << 1,
-    FTC_ERROR_STEP_02 = 1 << 2,
-    FTC_ERROR_STEP_03 = 1 << 3,
-    FTC_ERROR_STEP_04 = 1 << 4,
-    FTC_ERROR_STEP_05 = 1 << 5,
-    FTC_ERROR_STEP_06 = 1 << 6,
-    FTC_ERROR_STEP_07 = 1 << 7,
-    FTC_ERROR_STEP_08 = 1 << 8,
-    FTC_ERROR_STEP_09 = 1 << 9
+    FTC_STATUS_NO_CFG = 1 << 1, /*!< No gpredict.cfg found. */
+    FTC_STATUS_NO_QTH = 1 << 2, /*!< No .qth file found. */
+    FTC_STATUS_NO_MOD = 1 << 3, /*!< No .mod file found. */
+    FTC_STATUS_NO_SAT = 1 << 4, /*!< No .sat file found. */
+    FTC_STATUS_NO_CAT = 1 << 5, /*!< No .cat file found. */
+    FTC_STATUS_NO_CACHE = 1 << 6,       /*!< No satdata/cache directory. */
+    FTC_STATUS_NO_HWCONF = 1 << 7,      /*!< No hwconf directory. */
+    FTC_STATUS_NO_TRSP = 1 << 8,        /*!< No trsp directory. */
 };
 
-guint           first_time_check_run(void);
+int             first_time_check_run(void);
 
 #endif
