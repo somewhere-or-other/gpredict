@@ -1,8 +1,7 @@
-/* -*- Mode: C; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
 /*
     Gpredict: Real-time satellite tracking and orbit prediction program
 
-    Copyright (C)  2001-2009  Alexandru Csete, OZ9AEC.
+    Copyright (C)  2001-2014  Alexandru Csete, OZ9AEC.
 
     Authors: Alexandru Csete <oz9aec@gmail.com>
 
@@ -30,7 +29,7 @@
 
 
 /** \brief Bit fields in the returned error code */
-enum {
+enum ftc_status {
     FTC_ERROR_STEP_01 = 1 << 1,
     FTC_ERROR_STEP_02 = 1 << 2,
     FTC_ERROR_STEP_03 = 1 << 3,
@@ -42,6 +41,6 @@ enum {
     FTC_ERROR_STEP_09 = 1 << 9
 };
 
-guint first_time_check_run (void);
+guint           first_time_check_run(void);
 
 #endif
