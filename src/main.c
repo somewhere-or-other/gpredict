@@ -40,7 +40,7 @@
 #include <build-config.h>
 #endif
 #include "sat-log.h"
-#include "first-time.h"
+#include "first_time_check.h"
 #include "compat.h"
 #include "gui.h"
 #include "mod-mgr.h"

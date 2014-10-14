@@ -34,7 +34,7 @@
 #include "sat-log.h"
 #include "sat-cfg.h"
 #include "gpredict-utils.h"
-#include "first-time.h"
+#include "first_time_check.h"
 
 
 /* private function prototypes */
