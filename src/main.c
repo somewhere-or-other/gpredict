@@ -41,6 +41,7 @@
 #endif
 #include "sat-log.h"
 #include "first_time_check.h"
+#include "first_time_wizard.h"
 #include "compat.h"
 #include "gui.h"
 #include "mod-mgr.h"
@@ -106,7 +107,7 @@ int main(int argc, char *argv[])
 {
     GError         *err = NULL;
     GOptionContext *context;
-    guint           error = 0;
+    int             status;
 
 
 #ifdef G_OS_WIN32
@@ -150,17 +151,19 @@ int main(int argc, char *argv[])
         clean_trsp();
 
     /* check that user settings are ok */
-    error = first_time_check_run();
+    status = first_time_check_run();
 
+first_time_wizard_run(status);
 
-    if (error)
+    if (status)
     {
+        first_time_wizard_run(status);
         sat_log_log(SAT_LOG_LEVEL_ERROR,
                     _("%s: User config check failed (code %d). "
                       "This is fatal.\n"
                       "A possible solution would be to remove the "
                       ".config/Gpredict data dir\n"
-                      "in your home directory"), __func__, error);
+                      "in your home directory"), __func__, status);
 
         return 1;
     }

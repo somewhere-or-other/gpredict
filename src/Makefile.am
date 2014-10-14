@@ -29,6 +29,7 @@ gpredict_SOURCES = \
     about.c about.h \
     compat.c compat.h config-keys.h \
     first_time_check.c first_time_check.h \
+    first_time_wizard.c first_time_wizard.h \
     gpredict-help.c gpredict-help.h \
     gpredict-url-hook.c gpredict-url-hook.h \
     gpredict-utils.c gpredict-utils.h \
