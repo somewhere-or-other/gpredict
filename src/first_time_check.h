@@ -24,8 +24,8 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, visit http://www.fsf.org/
 */
-#ifndef FIRST_TIME_H
-#define FIRST_TIME_H 1
+#ifndef FIRST_TIME_CHECK_H
+#define FIRST_TIME_CHECK_H 1
 
 
 /** Bit fields in the returned status code */

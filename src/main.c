@@ -153,19 +153,21 @@ int main(int argc, char *argv[])
     /* check that user settings are ok */
     status = first_time_check_run();
 
-first_time_wizard_run(status);
-
     if (status)
     {
-        first_time_wizard_run(status);
-        sat_log_log(SAT_LOG_LEVEL_ERROR,
-                    _("%s: User config check failed (code %d). "
-                      "This is fatal.\n"
-                      "A possible solution would be to remove the "
-                      ".config/Gpredict data dir\n"
-                      "in your home directory"), __func__, status);
+        sat_log_log(SAT_LOG_LEVEL_WARN,
+                    _("%s: User configuration is incomplete (code: %X)"),
+                    __func__, status);
+        sat_log_log(SAT_LOG_LEVEL_WARN,
+                    _("%s: Launching configuration wizard"), __func__);
 
-        return 1;
+        if (first_time_wizard_run(status))
+        {
+            sat_log_log(SAT_LOG_LEVEL_ERROR,
+                        _("%s: User configuration still incomplete! "
+                          "Exiting."), __func__);
+            return 1;
+        }
     }
 
     /* create application */
