@@ -205,18 +205,19 @@ gchar *get_user_conf_dir(void)
 {
     gchar *dir = NULL;
 
-#ifdef G_OS_UNIX
-    dir = g_strconcat(g_get_user_config_dir(), G_DIR_SEPARATOR_S, "Gpredict", NULL);
+    /* NOTE: Normal directory is "Gpredict" */
+#ifdef G_OS_UNIX  
+    dir = g_strconcat(g_get_user_config_dir(), G_DIR_SEPARATOR_S, "gpredict-test", NULL);
 #endif
 #ifdef G_OS_WIN32
     // FIXME: does this work?
-    dir = g_strconcat(g_get_home_dir(), G_DIR_SEPARATOR_S, "Gpredict", NULL);
+    dir = g_strconcat(g_get_home_dir(), G_DIR_SEPARATOR_S, "gpredict-test", NULL);
 #endif
 /* see gtk-osx.sourceforge.net -> Integration */
 #ifdef MAC_INTEGRATION
     dir = g_strconcat(g_get_home_dir(), G_DIR_SEPARATOR_S,
                       "Library", G_DIR_SEPARATOR_S,
-                      "Application Support", G_DIR_SEPARATOR_S, "Gpredict", NULL);
+                      "Application Support", G_DIR_SEPARATOR_S, "gpredict-test", NULL);
 #endif
 
     return dir;
