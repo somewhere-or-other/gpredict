@@ -1,7 +1,8 @@
 [encoding: UTF-8]
 src/about.c
 src/compat.c
-src/first-time.c
+src/first_time_check.c
+src/first_time_wizard.c
 src/gpredict-help.c
 src/gpredict-url-hook.c
 src/gpredict-utils.c
