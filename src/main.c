@@ -29,30 +29,30 @@
  * @ingroup main
  *
  * Main program file.
- *
  */
-#include <stdlib.h>
-#include <signal.h>
-#include <gtk/gtk.h>
-#include <glib/gi18n.h>
-#include <glib/gstdio.h>
+
 #ifdef HAVE_CONFIG_H
 #include <build-config.h>
 #endif
-#include "sat-log.h"
-#include "first_time_check.h"
-#include "first_time_wizard.h"
-#include "compat.h"
-#include "gui.h"
-#include "mod-mgr.h"
-#include "tle-update.h"
-#include "sat-cfg.h"
-#include "gtk-sat-selector.h"
-#include "sat-debugger.h"
 
+#include <glib/gi18n.h>
+#include <glib/gstdio.h>
+#include <gtk/gtk.h>
+#include <stdlib.h>
+#include <signal.h>
 #ifdef WIN32
 #include <winsock2.h>
 #endif
+
+#include "compat.h"
+#include "gtk-sat-selector.h"
+#include "gui.h"
+#include "first-time.h"
+#include "tle-update.h"
+#include "mod-mgr.h"
+#include "sat-cfg.h"
+#include "sat-debugger.h"
+#include "sat-log.h"
 
 /** Main application widget. */
 GtkWidget      *app;
@@ -74,10 +74,10 @@ static GOptionEntry entries[] = {
 
 const gchar    *dummy = N_("just to have a pot");
 
-/** ID of TLE monitoring task */
+/* ID of TLE monitoring task */
 static guint    tle_mon_id = 0;
 
-/** flag indicating whether TLE update is running */
+/* flag indicating whether TLE update is running */
 static gboolean tle_upd_running = FALSE;
 
 /** flag indicating whether user has been notified of TLE update */
@@ -152,7 +152,6 @@ int main(int argc, char *argv[])
 
     /* check that user settings are ok */
     status = first_time_check_run();
-
     if (status)
     {
         sat_log_log(SAT_LOG_LEVEL_WARN,
@@ -193,9 +192,9 @@ int main(int argc, char *argv[])
     sat_cfg_close();
 
 #ifdef WIN32
-    // Cleanup Windozze Sockets
     CloseWinSock2();
 #endif
+
     return 0;
 }
 

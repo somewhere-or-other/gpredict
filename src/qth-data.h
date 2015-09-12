@@ -31,7 +31,6 @@
 #include <glib.h>
 #include "sgpsdp/sgp4sdp4.h"
 
-
 /** QTH data structure in human readable form. */
 typedef struct {
     gchar          *name;       /*!< Name, eg. callsign. */
@@ -62,6 +61,7 @@ enum {
     QTH_STATIC_TYPE = 0,
     QTH_GPSD_TYPE
 } qth_data_type;
+
 
 gint            qth_data_read(const gchar * filename, qth_t * qth);
 gint            qth_data_save(const gchar * filename, qth_t * qth);
