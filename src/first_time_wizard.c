@@ -80,11 +80,14 @@ static void cancel_wizard(GtkAssistant * assistant, wizard_t * wizard)
 
 static void add_welcome_page(wizard_t * wizard)
 {
+
+#define text N_("<span weight='bold'>" \
+                "This is gpredict version " VERSION "</span>\n\n" \
+                "Before we can continue we need some location and satellite " \
+                "data. On the following pages you will be guided through " \
+                "providing or acquiring this data.")
+
     int             idx;
-    const gchar    *text = N_("<span weight='bold'>"
-                              "Welcome to gpredict " VERSION "</span>\n\n"
-                              "On the following pages you will be guided through "
-                              "the initial setup required to run gpredict.");
     GtkWidget      *page;       /* the current wizard page */
     GtkWidget      *vbox;       /* main vertical box */
     GtkWidget      *label;
@@ -113,6 +116,10 @@ static void add_qth_page(wizard_t * wizard)
     int             idx;
     GtkWidget      *page;       /* the current wizard page */
     GtkWidget      *vbox;       /* main vertical box */
+
+    /* FIXME: we should use external qth_editor object, but the present one
+     * depends on sat-pref window?
+     */
 
     vbox = gtk_vbox_new(FALSE, 10);
     gtk_box_pack_start(GTK_BOX(vbox), gtk_label_new("tmp"), FALSE, FALSE, 20);
