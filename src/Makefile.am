@@ -115,7 +115,8 @@ gpredict_SOURCES = \
     tle-tools.c tle-tools.h \
     tle-update.c tle-update.h \
     sat-debugger.c sat-debugger.h \
-    strnatcmp.c strnatcmp.h
+    strnatcmp.c strnatcmp.h \
+    widgets/qth_editor.c widgets/qth_editor.h
 
 
 
