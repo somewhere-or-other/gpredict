@@ -26,6 +26,8 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
+#include "qth-data.h"
+
 /* *INDENT-OFF* */
 #ifdef __cplusplus
 extern "C" {
@@ -51,19 +53,39 @@ typedef struct _QthEditorClass      QthEditorClass;
 
 struct _qth_editor
 {
-     GtkVBox            vbox;
-     
-     void               (* update) (GtkWidget *widget);
+    GtkVBox         vbox;
+
+    /* active widgets */
+    GtkWidget      *name_entry;
+    GtkWidget      *qra_entry;
+    GtkWidget      *lat_spin;
+    GtkWidget      *lon_spin;
+    GtkWidget      *alt_spin;
+    GtkWidget      *ns;             /* North / south selector */
+    GtkWidget      *ew;             /* East / west selector */
+
+    /* signal IDs */
+    gulong          qra_sigid;
+    gulong          lon_sigid;
+    gulong          lat_sigid;
+    gulong          ns_sigid;
+    gulong          ew_sigid;
+
+    void          (* update) (GtkWidget *widget);
 };
 
 struct _QthEditorClass
 {
-     GtkVBoxClass       parent_class;
+    GtkVBoxClass       parent_class;
+
+    /* changed signal */
+    void (* changed)  (QthEditor * editor);
 };
 
 GType           qth_editor_get_type(void);
 GtkWidget      *qth_editor_new(void);
-void            qth_editor_update(GtkWidget *widget);
+void            qth_editor_get_qth(GtkWidget * widget, qth_t * qth);
+void            qth_editor_update(GtkWidget * widget);
 
 /* *INDENT-OFF* */
 #ifdef __cplusplus

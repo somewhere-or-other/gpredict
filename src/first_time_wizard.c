@@ -24,13 +24,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, visit http://www.fsf.org/
  */
-#ifdef HAVE_CONFIG_H
-#include <build-config.h>
-#endif
+#include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
+#ifdef HAVE_CONFIG_H
+#include <build-config.h>
+#endif
+
 #include "first_time_check.h"
+#include "widgets/qth_editor.h"
 
 
 /** Convenience struct with all wizard data. */
@@ -106,23 +109,33 @@ static void add_welcome_page(wizard_t * wizard)
     gtk_assistant_set_page_type(GTK_ASSISTANT(wizard->widget), page,
                                 GTK_ASSISTANT_PAGE_INTRO);
     gtk_assistant_set_page_title(GTK_ASSISTANT(wizard->widget), page,
-                                 _("Welcome to Gpredict!"));
+                                 _("Hi there!"));
     gtk_assistant_set_page_complete(GTK_ASSISTANT(wizard->widget), page, TRUE);
 }
 
+void qth_changed(GtkWidget *widget, gpointer data)
+{
+    QthEditor   *editor = QTH_EDITOR(widget);
+    wizard_t    *wizard = (wizard_t *)data;
+    
+    g_print ("QTH changed signal!\n");
+}
 
 static void add_qth_page(wizard_t * wizard)
 {
     int             idx;
     GtkWidget      *page;       /* the current wizard page */
     GtkWidget      *vbox;       /* main vertical box */
+    GtkWidget      *editor;
 
     /* FIXME: we should use external qth_editor object, but the present one
      * depends on sat-pref window?
      */
+    editor = qth_editor_new();
+    g_signal_connect(editor, "changed", G_CALLBACK(qth_changed), wizard);
 
     vbox = gtk_vbox_new(FALSE, 10);
-    gtk_box_pack_start(GTK_BOX(vbox), gtk_label_new("tmp"), FALSE, FALSE, 20);
+    gtk_box_pack_start(GTK_BOX(vbox), editor, FALSE, FALSE, 20);
 
     /* create new page and get a reference to it */
     idx = gtk_assistant_append_page(GTK_ASSISTANT(wizard->widget), vbox);
