@@ -33,9 +33,9 @@
 #include "qth_editor.h"
 #include "sat-log.h"
 
-static void     name_changed(GtkWidget * widget, gpointer data);
-static void     latlon_changed(GtkWidget * widget, gpointer data);
-static void     qra_changed(GtkEntry * entry, gpointer data);
+static void     name_changed(GtkWidget * widget, QthEditor * editor);
+static void     latlon_changed(GtkWidget * widget, QthEditor * editor);
+static void     qra_changed(GtkEntry * entry, QthEditor * editor);
 
 static GtkVBoxClass *parent_class = NULL;
 static guint qth_editor_signals[1] = { 0 };
@@ -62,7 +62,8 @@ static void qth_editor_class_init(QthEditorClass *class)
         NULL, NULL,
         g_cclosure_marshal_VOID__VOID,
         G_TYPE_NONE,
-        0); /* FIXME: Add gboolean G_TYPE_BOOLEAN */
+        1,
+        G_TYPE_BOOLEAN); /* whether QTH data is valid */
 }
 
 static void qth_editor_init(QthEditor *editor)
@@ -243,13 +244,11 @@ void qth_editor_update(GtkWidget *widget)
  * are entered and to check whether the length of the name is greater than
  * zero.
  */
-static void name_changed(GtkWidget * widget, gpointer data)
+static void name_changed(GtkWidget * widget, QthEditor * editor)
 {
     const gchar    *text;
     gchar          *entry, *end, *j;
     gint            len, pos;
-
-    QthEditor *editor = QTH_EDITOR(data);
 
     /* step 1: ensure that only valid characters are entered
        (stolen from xlog, tnx pg4i)
@@ -281,7 +280,9 @@ static void name_changed(GtkWidget * widget, gpointer data)
 
     text = gtk_entry_get_text(GTK_ENTRY(widget));
     if (g_utf8_strlen(text, -1) > 0)
-        g_signal_emit(editor, qth_editor_signals[0], 0);
+        g_signal_emit(editor, qth_editor_signals[0], 0, TRUE);
+    else
+        g_signal_emit(editor, qth_editor_signals[0], 0, FALSE);
 }
 
 
@@ -292,13 +293,12 @@ static void name_changed(GtkWidget * widget, gpointer data)
  * be either one of the spin buttons or the combo boxes. It reads the
  * coordinates and the calculates the new Maidenhead locator square.
  */
-static void latlon_changed(GtkWidget * widget, gpointer data)
+static void latlon_changed(GtkWidget * widget, QthEditor * editor)
 {
     gchar          *locator;
     gint            retcode;
     gdouble         latf, lonf;
 
-    QthEditor *editor = QTH_EDITOR(data);
     (void)widget;
 
     locator = g_try_malloc(7);
@@ -354,14 +354,13 @@ static void latlon_changed(GtkWidget * widget, gpointer data)
  * It will calculate the new coordinates and update the spin butrtons and
  * the combo boxes.
  */
-static void qra_changed(GtkEntry * entry, gpointer data)
+static void qra_changed(GtkEntry * entry, QthEditor * editor)
 {
     gint            retcode;
     gdouble         latf, lonf;
     gchar          *msg;
 
     (void) entry;
-    QthEditor *editor = QTH_EDITOR(data);
 
     retcode = locator2longlat(&lonf, &latf,
         gtk_entry_get_text(GTK_ENTRY(editor->qra_entry)));
