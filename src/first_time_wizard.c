@@ -43,7 +43,6 @@ typedef struct {
     GtkWidget      *widget;
 } wizard_t;
 
-
 static gint delete_wizard(GtkWidget * widget, GdkEvent * event,
                           wizard_t * wizard)
 {
@@ -85,10 +84,11 @@ static void add_welcome_page(wizard_t * wizard)
 {
 
 #define text N_("<span weight='bold'>" \
-                "This is gpredict version " VERSION "</span>\n\n" \
-                "Before we can continue we need some location and satellite " \
-                "data. On the following pages you will be guided through " \
-                "providing or acquiring this data.")
+                "I am gpredict version " VERSION "</span>\n\n" \
+                "Before I can track satellites for you I need to know where "\
+                "you are and which satellites you are interested in.\n\n"\
+                "On the following pages I will guide through this "\
+                "first time setup. Ready to go?")
 
     int             idx;
     GtkWidget      *page;       /* the current wizard page */
@@ -113,20 +113,29 @@ static void add_welcome_page(wizard_t * wizard)
     gtk_assistant_set_page_complete(GTK_ASSISTANT(wizard->widget), page, TRUE);
 }
 
-void qth_changed(GtkWidget *widget, gpointer data)
+/**
+ * Manage "changed" signals from the QTH editor widget.
+ * @param widget Pointer to the QTH editor widget that emiutted the signal.
+ * @param valid  A boolean flag indicating whether the current QTH data is valid.
+ * @param wizard Pointer to user data, in this case to the wizard.
+ *
+ * We use the valid flag to decide whether to enable the "forward" button on
+ * the current page.
+ */
+static void qth_changed(GtkWidget *widget, gboolean valid, wizard_t * wizard)
 {
-    QthEditor   *editor = QTH_EDITOR(widget);
-    wizard_t    *wizard = (wizard_t *)data;
-    
-    g_print ("QTH changed signal!\n");
+    GtkWidget   *page = gtk_assistant_get_nth_page(GTK_ASSISTANT(wizard->widget),
+        gtk_assistant_get_current_page(GTK_ASSISTANT(wizard->widget)));
+
+    gtk_assistant_set_page_complete(GTK_ASSISTANT(wizard->widget), page, valid);
 }
 
 static void add_qth_page(wizard_t * wizard)
 {
-    int             idx;
     GtkWidget      *page;       /* the current wizard page */
     GtkWidget      *vbox;       /* main vertical box */
     GtkWidget      *editor;
+    int             idx;
 
     /* FIXME: we should use external qth_editor object, but the present one
      * depends on sat-pref window?
@@ -145,6 +154,87 @@ static void add_qth_page(wizard_t * wizard)
                                 GTK_ASSISTANT_PAGE_CONTENT);
     gtk_assistant_set_page_title(GTK_ASSISTANT(wizard->widget), page,
                                  _("Location info"));
+}
+
+static void add_satellite_page(wizard_t * wizard)
+{
+    GtkWidget      *vbox;
+    GtkWidget      *page;
+    int             idx;
+
+    vbox = gtk_vbox_new(FALSE, 10);
+    //gtk_box_pack_start(GTK_BOX(vbox), editor, FALSE, FALSE, 20);
+
+    /* create new page and get a reference to it */
+    idx = gtk_assistant_append_page(GTK_ASSISTANT(wizard->widget), vbox);
+    page = gtk_assistant_get_nth_page(GTK_ASSISTANT(wizard->widget), idx);
+
+    gtk_assistant_set_page_type(GTK_ASSISTANT(wizard->widget), page,
+                                GTK_ASSISTANT_PAGE_CONTENT);
+    gtk_assistant_set_page_title(GTK_ASSISTANT(wizard->widget), page,
+                                 _("Satellite data"));
+
+    //gtk_assistant_set_page_complete(GTK_ASSISTANT(wizard->widget), page, TRUE);
+}
+
+/**
+ * Callback called when the progresspage is realized on the screen.
+ * @param page Pointer to the progress page widget.
+ * @param wizard Pointer to the wizard object.
+ *
+ * The progress page is used to show progress while saving QTH data as well as
+ * downloading and importing satellite data from the selected sources.
+ */
+static void do_progress(GtkWidget * page, wizard_t * wizard)
+{
+    g_print("Go wizard, go!\n");
+}
+
+/**
+ * Create a progress page.
+ * @param wizard
+ *
+ * he progress page is used to show progress while saving QTH data as well as
+ * downloading and importing satellite data from the selected sources.
+ */
+static void add_progress_page(wizard_t * wizard)
+{
+    GtkWidget      *vbox;
+    GtkWidget      *page;
+    int             idx;
+
+    vbox = gtk_vbox_new(FALSE, 10);
+    //gtk_box_pack_start(GTK_BOX(vbox), editor, FALSE, FALSE, 20);
+
+    /* create new page and get a reference to it */
+    idx = gtk_assistant_append_page(GTK_ASSISTANT(wizard->widget), vbox);
+    page = gtk_assistant_get_nth_page(GTK_ASSISTANT(wizard->widget), idx);
+
+    gtk_assistant_set_page_type(GTK_ASSISTANT(wizard->widget), page,
+                                GTK_ASSISTANT_PAGE_PROGRESS);
+    gtk_assistant_set_page_title(GTK_ASSISTANT(wizard->widget), page,
+                                 _("Setting up stuff..."));
+
+    g_signal_connect(G_OBJECT(page), "realize", G_CALLBACK(do_progress), wizard);
+}
+
+static void add_final_page(wizard_t * wizard)
+{
+    GtkWidget      *vbox;
+    GtkWidget      *page;
+    int             idx;
+
+    vbox = gtk_vbox_new(FALSE, 10);
+    //gtk_box_pack_start(GTK_BOX(vbox), editor, FALSE, FALSE, 20);
+
+    /* create new page and get a reference to it */
+    idx = gtk_assistant_append_page(GTK_ASSISTANT(wizard->widget), vbox);
+    page = gtk_assistant_get_nth_page(GTK_ASSISTANT(wizard->widget), idx);
+
+    gtk_assistant_set_page_type(GTK_ASSISTANT(wizard->widget), page,
+                                GTK_ASSISTANT_PAGE_SUMMARY);
+    gtk_assistant_set_page_title(GTK_ASSISTANT(wizard->widget), page,
+                                 _("We are ready!"));
 }
 
 /**
@@ -168,6 +258,12 @@ int first_time_wizard_run(int status)
 
     if (status & FTC_STATUS_NO_QTH)
         add_qth_page(wizard);
+
+    if (status & FTC_STATUS_NO_SAT)
+        add_satellite_page(wizard);
+
+    add_progress_page(wizard);
+    add_final_page(wizard);
 
     g_signal_connect(G_OBJECT(wizard->widget), "delete_event",
                      G_CALLBACK(delete_wizard), wizard);
