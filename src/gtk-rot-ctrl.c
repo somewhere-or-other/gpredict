@@ -100,7 +100,7 @@ static gboolean have_conf(void);
 static gint     sat_name_compare(sat_t * a, sat_t * b);
 static gint     rot_name_compare(const gchar * a, const gchar * b);
 
-static gboolean is_flipped_pass(pass_t * pass, rot_az_type_t type);
+static gboolean is_flipped_pass(pass_t * pass, rot_az_type_t type, gdouble azstoppos);
 static inline void set_flipped_pass(GtkRotCtrl * ctrl);
 
 static GtkVBoxClass *parent_class = NULL;
@@ -1561,7 +1561,7 @@ static gint rot_name_compare(const gchar * a, const gchar * b)
  *
  * This is a function of the rotator and the particular pass. 
  */
-static gboolean is_flipped_pass(pass_t * pass, rot_az_type_t type)
+static gboolean is_flipped_pass(pass_t * pass, rot_az_type_t type, gdouble azstoppos)
 {
     gdouble         max_az = 0, min_az = 0, offset=0;
     gdouble         caz, last_az = pass->aos_az;
@@ -1581,13 +1581,13 @@ static gboolean is_flipped_pass(pass_t * pass, rot_az_type_t type)
         max_az = 180;
     }
 
-    /* Offset by abs(rotator_stop_offset-min_az) to handle
+    /* Offset by abs(azstoppos-min_az) to handle
      * rotators with non-default positions.
      * Note that the default positions of the rotator stops
      * (eg. -180 for ROT_AZ_TYPE_180, and 0 for 
      * ROT_AZ_TYPE_360) will create an offset of 0, which
      * seems like a pretty sane default. */
-    offset = fabs(rotator_stop_offset-min_az); //TODO: get rotator_stop_offset from somewhere
+    offset = fabs(azstoppos-min_az); 
     min_az += offset;
     max_az += offset;
     
@@ -1644,5 +1644,5 @@ static gboolean is_flipped_pass(pass_t * pass, rot_az_type_t type)
 static inline void set_flipped_pass(GtkRotCtrl * ctrl)
 {
     if (ctrl->conf && ctrl->pass)
-        ctrl->flipped = is_flipped_pass(ctrl->pass, ctrl->conf->aztype);
+        ctrl->flipped = is_flipped_pass(ctrl->pass, ctrl->conf->aztype, ctrl->conf->azstoppos);
 }
