@@ -1563,7 +1563,7 @@ static gint rot_name_compare(const gchar * a, const gchar * b)
  */
 static gboolean is_flipped_pass(pass_t * pass, rot_az_type_t type)
 {
-    gdouble         max_az = 0, min_az = 0;
+    gdouble         max_az = 0, min_az = 0, offset=0;
     gdouble         caz, last_az = pass->aos_az;
     guint           num, i;
     pass_detail_t  *detail;
@@ -1581,6 +1581,16 @@ static gboolean is_flipped_pass(pass_t * pass, rot_az_type_t type)
         max_az = 180;
     }
 
+    /* Offset by abs(rotator_stop_offset-min_az) to handle
+     * rotators with non-default positions.
+     * Note that the default positions of the rotator stops
+     * (eg. -180 for ROT_AZ_TYPE_180, and 0 for 
+     * ROT_AZ_TYPE_360) will create an offset of 0, which
+     * seems like a pretty sane default. */
+    offset = fabs(rotator_stop_offset-min_az); //TODO: get rotator_stop_offset from somewhere
+    min_az += offset;
+    max_az += offset;
+    
     /* Assume that min_az and max_az are atleat 360 degrees apart
        get the azimuth that is in a settable range */
     while (last_az > max_az)
