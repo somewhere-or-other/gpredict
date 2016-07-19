@@ -243,6 +243,7 @@ static GtkTreeModel *create_and_fill_model ()
                                         ROT_LIST_COL_MINEL, conf.minel,
                                         ROT_LIST_COL_MAXEL, conf.maxel,
                                         ROT_LIST_COL_AZTYPE, conf.aztype,
+                                        ROT_LIST_COL_AZSTOPPOS, conf.azstoppos,
                                         -1);
                     
                     sat_log_log (SAT_LOG_LEVEL_DEBUG,
@@ -355,6 +356,7 @@ void sat_pref_rot_ok     ()
         .minel = 0,
         .maxel = 90,
         .aztype = ROT_AZ_TYPE_360,
+        .azstoppos = 0,
     };
 
     
@@ -396,6 +398,7 @@ void sat_pref_rot_ok     ()
                                 ROT_LIST_COL_MINEL, &conf.minel,
                                 ROT_LIST_COL_MAXEL, &conf.maxel,
                                 ROT_LIST_COL_AZTYPE, &conf.aztype,
+                                ROT_LIST_COL_AZSTOPPOS, &conf.azstoppos,
                                 -1);
             rotor_conf_save (&conf);
         
@@ -440,6 +443,7 @@ static void add_cb    (GtkWidget *button, gpointer data)
         .minel = 0,
         .maxel = 90,
         .aztype = ROT_AZ_TYPE_360,
+        .azstoppos = 0,
     };
     
     /* run rot conf editor */
@@ -458,6 +462,7 @@ static void add_cb    (GtkWidget *button, gpointer data)
                             ROT_LIST_COL_MINEL, conf.minel,
                             ROT_LIST_COL_MAXEL, conf.maxel,
                             ROT_LIST_COL_AZTYPE, conf.aztype,
+                            ROT_LIST_COL_AZSTOPPOS, conf.azstoppos,
                             -1);
         
         g_free (conf.name);
@@ -495,6 +500,7 @@ static void edit_cb   (GtkWidget *button, gpointer data)
         .minel = 0,
         .maxel = 90,
         .aztype = ROT_AZ_TYPE_360,
+        .azstoppos = 0,
     };
 
     
@@ -524,6 +530,7 @@ static void edit_cb   (GtkWidget *button, gpointer data)
                             ROT_LIST_COL_MINEL, &conf.minel,
                             ROT_LIST_COL_MAXEL, &conf.maxel,
                             ROT_LIST_COL_AZTYPE, &conf.aztype,
+                            ROT_LIST_COL_AZSTOPPOS, &conf.azstoppos,
                             -1);
 
     }
@@ -556,6 +563,7 @@ static void edit_cb   (GtkWidget *button, gpointer data)
                             ROT_LIST_COL_MINEL, conf.minel,
                             ROT_LIST_COL_MAXEL, conf.maxel,
                             ROT_LIST_COL_AZTYPE, conf.aztype,
+                            ROT_LIST_COL_AZSTOPPOS, conf.azstoppos,
                             -1);
         
     }
