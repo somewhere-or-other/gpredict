@@ -1580,6 +1580,8 @@ static gboolean is_flipped_pass(pass_t * pass, rot_az_type_t type, gdouble azsto
         min_az = -180;
         max_az = 180;
     }
+    
+
 
     /* Offset by abs(azstoppos-min_az) to handle
      * rotators with non-default positions.
@@ -1590,6 +1592,9 @@ static gboolean is_flipped_pass(pass_t * pass, rot_az_type_t type, gdouble azsto
     offset = fabs(azstoppos-min_az); 
     min_az += offset;
     max_az += offset;
+    
+    sat_log_log (SAT_LOG_LEVEL_DEBUG,
+                     _("%s: Offset: %f; min/max az after offset: %f->%f"), __func__, offset, min_az, max_az);
     
     /* Assume that min_az and max_az are atleat 360 degrees apart
        get the azimuth that is in a settable range */

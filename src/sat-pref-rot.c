@@ -191,6 +191,7 @@ static void create_rot_list ()
     gtk_tree_view_insert_column (GTK_TREE_VIEW (rotlist), column, -1);
 
     g_signal_connect (rotlist, "row-activated", G_CALLBACK (row_activated_cb), NULL);
+
 }
 
 
@@ -215,7 +216,8 @@ static GtkTreeModel *create_and_fill_model ()
                                     G_TYPE_DOUBLE,    // Max Az
                                     G_TYPE_DOUBLE,    // Min El
                                     G_TYPE_DOUBLE,    // Max El
-                                    G_TYPE_INT        // Az type
+                                    G_TYPE_INT,       // Az type
+                                    G_TYPE_DOUBLE     // Az Stop Position
                                    );
      gtk_tree_sortable_set_sort_column_id( GTK_TREE_SORTABLE(liststore),ROT_LIST_COL_NAME,GTK_SORT_ASCENDING);
     /* open configuration directory */

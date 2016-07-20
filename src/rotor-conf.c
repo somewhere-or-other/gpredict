@@ -164,6 +164,10 @@ gboolean rotor_conf_read (rotor_conf_t *conf)
         g_clear_error (&error);
         conf->azstoppos = conf->minaz;
     }
+    sat_log_log (SAT_LOG_LEVEL_WARN,
+                 _("%s: current AzStopPos: %f"),
+                 __func__, conf->azstoppos);
+
     
     g_key_file_free (cfg);
     
