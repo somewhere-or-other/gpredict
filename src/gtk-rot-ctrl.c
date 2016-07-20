@@ -1583,13 +1583,16 @@ static gboolean is_flipped_pass(pass_t * pass, rot_az_type_t type, gdouble azsto
     
 
 
-    /* Offset by abs(azstoppos-min_az) to handle
+    sat_log_log (SAT_LOG_LEVEL_DEBUG,
+                 _("%s: Before offset, min/max az: %f->%f"), __func__, min_az, max_az);
+    
+    /* Offset by (azstoppos-min_az) to handle
      * rotators with non-default positions.
      * Note that the default positions of the rotator stops
      * (eg. -180 for ROT_AZ_TYPE_180, and 0 for 
      * ROT_AZ_TYPE_360) will create an offset of 0, which
      * seems like a pretty sane default. */
-    offset = fabs(azstoppos-min_az); 
+    offset = azstoppos-min_az; 
     min_az += offset;
     max_az += offset;
     
