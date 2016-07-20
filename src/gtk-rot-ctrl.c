@@ -1583,7 +1583,7 @@ static gboolean is_flipped_pass(pass_t * pass, rot_az_type_t type, gdouble azsto
     
 
 
-    sat_log_log (SAT_LOG_LEVEL_DEBUG,
+    sat_log_log (SAT_LOG_LEVEL_WARN,
                  _("%s: Before offset, min/max az: %f->%f"), __func__, min_az, max_az);
     
     /* Offset by (azstoppos-min_az) to handle
@@ -1596,7 +1596,7 @@ static gboolean is_flipped_pass(pass_t * pass, rot_az_type_t type, gdouble azsto
     min_az += offset;
     max_az += offset;
     
-    sat_log_log (SAT_LOG_LEVEL_DEBUG,
+    sat_log_log (SAT_LOG_LEVEL_WARN,
                      _("%s: Offset: %f; min/max az after offset: %f->%f"), __func__, offset, min_az, max_az);
     
     /* Assume that min_az and max_az are atleat 360 degrees apart
@@ -1616,6 +1616,10 @@ static gboolean is_flipped_pass(pass_t * pass, rot_az_type_t type, gdouble azsto
         {
             detail = PASS_DETAIL(g_slist_nth_data(pass->details, i));
             caz = detail->az;
+            
+            sat_log_log (SAT_LOG_LEVEL_WARN,
+                         _("%s: Comparing %f (last) to %f (cur)"), __func__, last_az, caz);
+            
             while (caz > max_az)
             {
                 caz -= 360;
@@ -1624,8 +1628,13 @@ static gboolean is_flipped_pass(pass_t * pass, rot_az_type_t type, gdouble azsto
             {
                 caz += 360;
             }
+            sat_log_log (SAT_LOG_LEVEL_WARN,
+                         _("%s: Comparing normalized %f (last) to %f (cur)"), __func__, last_az, caz);
+            
             if (fabs(caz - last_az) > 180)
             {
+                sat_log_log (SAT_LOG_LEVEL_WARN,
+                         _("%s: Found diff > 180; flip pass"), __func__);
                 retval = TRUE;
             }
 
@@ -1646,6 +1655,8 @@ static gboolean is_flipped_pass(pass_t * pass, rot_az_type_t type, gdouble azsto
         retval = TRUE;
     }
 
+    sat_log_log (SAT_LOG_LEVEL_WARN,
+                         _("%s: Returning %s"), __func__, (retval?"TRUE":"False"));
     return retval;
 }
 
