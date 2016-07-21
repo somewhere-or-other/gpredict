@@ -159,15 +159,11 @@ gboolean rotor_conf_read (rotor_conf_t *conf)
     conf->azstoppos = g_key_file_get_double (cfg, GROUP, KEY_AZSTOPPOS, &error);
     if (error != NULL) {
         sat_log_log (SAT_LOG_LEVEL_WARN,
-                     _("%s: AzStopPos not defined for %s. Assuming at minaz\302\260."),
-                       __func__, conf->name);
+                     _("%s: AzStopPos not defined for %s. Assuming at minaz (%f\302\260)."),
+                       __func__, conf->name, conf->minaz);
         g_clear_error (&error);
         conf->azstoppos = conf->minaz;
     }
-    sat_log_log (SAT_LOG_LEVEL_WARN,
-                 _("%s: current AzStopPos: %f"),
-                 __func__, conf->azstoppos);
-
     
     g_key_file_free (cfg);
     
