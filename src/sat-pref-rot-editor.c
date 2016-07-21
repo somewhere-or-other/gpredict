@@ -59,6 +59,7 @@ static GtkWidget *minaz;
 static GtkWidget *maxaz;
 static GtkWidget *minel;
 static GtkWidget *maxel;
+static GtkWidget *azstoppos;
 
 
 static GtkWidget    *create_editor_widgets (rotor_conf_t *conf);
@@ -252,6 +253,21 @@ create_editor_widgets (rotor_conf_t *conf)
     gtk_spin_button_set_wrap (GTK_SPIN_BUTTON (maxel), FALSE);
     gtk_table_attach_defaults (GTK_TABLE (table), maxel, 3, 4, 6, 7);
     
+    
+    
+    label = gtk_label_new (_(" Azimuth Rotation Stop Position"));
+    gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
+    gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 3, 7, 8);
+    azstoppos = gtk_spin_button_new_with_range (-180, 360, 1);
+    gtk_spin_button_set_value (GTK_SPIN_BUTTON (azstoppos), 90);
+    gtk_spin_button_set_numeric (GTK_SPIN_BUTTON (azstoppos), TRUE);
+    gtk_spin_button_set_wrap (GTK_SPIN_BUTTON (azstoppos), FALSE);
+    gtk_table_attach_defaults (GTK_TABLE (table), azstoppos, 3, 4, 7, 8);
+    
+    
+    
+    
+    
     if (conf->name != NULL)
           update_widgets (conf);
 
@@ -287,6 +303,7 @@ update_widgets (rotor_conf_t *conf)
     gtk_spin_button_set_value (GTK_SPIN_BUTTON (maxaz), conf->maxaz);
     gtk_spin_button_set_value (GTK_SPIN_BUTTON (minel), conf->minel);
     gtk_spin_button_set_value (GTK_SPIN_BUTTON (maxel), conf->maxel);
+    gtk_spin_button_set_value (GTK_SPIN_BUTTON (azstoppos), conf->azstoppos);
     
 
 }
@@ -309,6 +326,8 @@ clear_widgets ()
     gtk_spin_button_set_value (GTK_SPIN_BUTTON (maxaz), 360);
     gtk_spin_button_set_value (GTK_SPIN_BUTTON (minel), 0);
     gtk_spin_button_set_value (GTK_SPIN_BUTTON (maxel), 90);
+    gtk_spin_button_set_value (GTK_SPIN_BUTTON (azstoppos), 0);
+    
 }
 
 
@@ -345,6 +364,9 @@ apply_changes         (rotor_conf_t *conf)
     conf->maxaz = gtk_spin_button_get_value (GTK_SPIN_BUTTON (maxaz));
     conf->minel = gtk_spin_button_get_value (GTK_SPIN_BUTTON (minel));
     conf->maxel = gtk_spin_button_get_value (GTK_SPIN_BUTTON (maxel));
+
+    /* az stop position */
+    conf->azstoppos = gtk_spin_button_get_value (GTK_SPIN_BUTTON (azstoppos));
     
      return TRUE;
 }

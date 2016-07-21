@@ -445,7 +445,7 @@ static void add_cb    (GtkWidget *button, gpointer data)
         .minel = 0,
         .maxel = 90,
         .aztype = ROT_AZ_TYPE_360,
-        .azstoppos = 0,
+        .azstoppos = 45,
     };
     
     /* run rot conf editor */
@@ -502,7 +502,7 @@ static void edit_cb   (GtkWidget *button, gpointer data)
         .minel = 0,
         .maxel = 90,
         .aztype = ROT_AZ_TYPE_360,
-        .azstoppos = 0,
+        .azstoppos = 0, //used in the "new rotator" dialog
     };
 
     
