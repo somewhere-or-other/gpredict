@@ -277,6 +277,7 @@ create_editor_widgets (rotor_conf_t *conf)
     gtk_spin_button_set_value (GTK_SPIN_BUTTON (azstoppos), 0);
     gtk_spin_button_set_numeric (GTK_SPIN_BUTTON (azstoppos), TRUE);
     gtk_spin_button_set_wrap (GTK_SPIN_BUTTON (azstoppos), FALSE);
+    gtk_widget_set_sensitive(azstoppos, FALSE);
     gtk_table_attach_defaults (GTK_TABLE (table), azstoppos, 2, 4, 10, 11);
     
 
