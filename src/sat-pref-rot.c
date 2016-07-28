@@ -361,7 +361,7 @@ void sat_pref_rot_ok     ()
         .maxel = 90,
         .aztype = ROT_AZ_TYPE_360,
         .azstoppos = 0,
-	.azstopposdefault = TRUE,
+        .azstopposdefault = TRUE,
     };
 
     

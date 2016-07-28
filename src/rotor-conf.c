@@ -168,24 +168,23 @@ gboolean rotor_conf_read (rotor_conf_t *conf)
     
     conf->azstopposdefault = g_key_file_get_boolean (cfg, GROUP, KEY_AZSTOPPOSDEFAULT, &error);
     if (error != NULL) {
-	if (conf->minaz == conf->azstoppos) {
-	  sat_log_log (SAT_LOG_LEVEL_WARN,
-		      _("%s: AzStopPosDefault not defined for %s, but AzStopPos matches default for this type, so assuming default."),
-			__func__, conf->name );
-	  conf->azstopposdefault = TRUE;
-	  g_clear_error (&error);
-	} else {
-	  sat_log_log (SAT_LOG_LEVEL_WARN,
-		      _("%s: AzStopPosDefault not defined for %s, and AzStopPos does not match default for this type, so assuming non-default."),
-			__func__, conf->name );
-	  conf->azstopposdefault = FALSE;
-	  g_clear_error (&error);
-	}
+        if (conf->minaz == conf->azstoppos) {
+            sat_log_log (SAT_LOG_LEVEL_WARN,
+                     _("%s: AzStopPosDefault not defined for %s, but AzStopPos matches default for this type, so assuming default."),
+                       __func__, conf->name );
+            conf->azstopposdefault = TRUE;
+            g_clear_error (&error);
+        } else {
+            sat_log_log (SAT_LOG_LEVEL_WARN,
+                     _("%s: AzStopPosDefault not defined for %s, and AzStopPos does not match default for this type, so assuming non-default."),
+                       __func__, conf->name );
+            conf->azstopposdefault = FALSE;
+            g_clear_error (&error);
+        }
     }
     
     g_key_file_free (cfg);
-    
-    
+
     return TRUE;
 }
 
