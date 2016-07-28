@@ -261,13 +261,6 @@ create_editor_widgets (rotor_conf_t *conf)
     label = gtk_label_new (_(" Azimuth Rotation Stop Position"));
     gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 4, 8, 9);
     
-    label = gtk_label_new (_(" Use Default for Az Type"));
-    gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
-    gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 9, 10);
-    azstopposdefault = gtk_check_button_new();
-    g_signal_connect (G_OBJECT (azstopposdefault), "toggled", G_CALLBACK (azstoppos_toggled), NULL);
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(azstopposdefault), TRUE);
-    gtk_table_attach_defaults (GTK_TABLE (table), azstopposdefault, 2, 4, 9, 10);
 
 
     label = gtk_label_new (_(" Custom Stop Position"));
@@ -281,6 +274,13 @@ create_editor_widgets (rotor_conf_t *conf)
     gtk_table_attach_defaults (GTK_TABLE (table), azstoppos, 2, 4, 10, 11);
     
 
+    label = gtk_label_new (_(" Use Default for Az Type"));
+    gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
+    gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 9, 10);
+    azstopposdefault = gtk_check_button_new();
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(azstopposdefault), TRUE);
+    g_signal_connect (G_OBJECT (azstopposdefault), "toggled", G_CALLBACK (azstoppos_toggled), NULL);
+    gtk_table_attach_defaults (GTK_TABLE (table), azstopposdefault, 2, 4, 9, 10);
     
     
     
