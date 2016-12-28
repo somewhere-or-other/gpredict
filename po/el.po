@@ -1,21 +1,22 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Greek translation for gpredict
+# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
+# This file is distributed under the same license as the gpredict package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: gpredict\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-19 00:04+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2014-11-15 20:37+0000\n"
+"Last-Translator: Dimitrios Ntoulas <Unknown>\n"
+"Language-Team: Greek <el@li.org>\n"
+"Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2016-07-31 05:42+0000\n"
+"X-Generator: Launchpad (build 18169)\n"
 
 #: ../src/about.c:67
 msgid ""
@@ -49,7 +50,7 @@ msgstr ""
 #. create window title and file name for window icon
 #: ../src/about.c:99 ../src/main.c:248
 msgid "GPREDICT"
-msgstr ""
+msgstr "GPREDICT"
 
 #: ../src/about.c:102
 msgid ""
@@ -61,6 +62,8 @@ msgstr ""
 #: ../src/about.c:119
 msgid "translator-credits"
 msgstr ""
+"Launchpad Contributions:\n"
+"  Dimitrios Ntoulas https://launchpad.net/~ntoulasd"
 
 #: ../src/first-time.c:182
 #, c-format
@@ -187,7 +190,7 @@ msgstr ""
 #. create and show dialogue with textbuffer
 #: ../src/gpredict-help.c:237
 msgid "Gpredict Info"
-msgstr ""
+msgstr "Gpredict Πληροφορίες"
 
 #: ../src/gpredict-utils.c:274 ../src/gpredict-utils.c:313
 #: ../src/gpredict-utils.c:360 ../src/gpredict-utils.c:402
@@ -237,7 +240,7 @@ msgstr ""
 
 #: ../src/gtk-azel-plot.c:364
 msgid "Local Time"
-msgstr ""
+msgstr "Τοπική ώρα"
 
 #: ../src/gtk-azel-plot.c:374 ../src/gtk-sky-glance.c:362
 #: ../src/pass-to-txt.c:160
@@ -262,19 +265,19 @@ msgstr ""
 
 #: ../src/gtk-polar-plot.c:645 ../src/gtk-polar-view.c:352
 msgid "N"
-msgstr ""
+msgstr "Β"
 
 #: ../src/gtk-polar-plot.c:655 ../src/gtk-polar-view.c:362
 msgid "S"
-msgstr ""
+msgstr "Ν"
 
 #: ../src/gtk-polar-plot.c:665 ../src/gtk-polar-view.c:372
 msgid "E"
-msgstr ""
+msgstr "Α"
 
 #: ../src/gtk-polar-plot.c:675 ../src/gtk-polar-view.c:382
 msgid "W"
-msgstr ""
+msgstr "Δ"
 
 #: ../src/gtk-polar-plot.c:779
 #, c-format
@@ -287,6 +290,8 @@ msgid ""
 "Next: %s\n"
 "in %02d:%02d:%02d"
 msgstr ""
+"Επόμενος: %s\n"
+"σε %02d:%02d:%02d"
 
 #: ../src/gtk-polar-view.c:718
 #, c-format
@@ -294,6 +299,8 @@ msgid ""
 "Next: %s\n"
 "in %02d:%02d"
 msgstr ""
+"Επόμενος: %s\n"
+"σε %02d:%02d"
 
 #: ../src/gtk-polar-view.c:729 ../src/gtk-sat-map.c:784
 #, c-format
@@ -302,7 +309,7 @@ msgstr ""
 
 #: ../src/gtk-polar-view.c:731 ../src/gtk-sat-map.c:786
 msgid "Next: ERR"
-msgstr ""
+msgstr "Επόμενος: ΣΦΑΛΜΑ"
 
 #: ../src/gtk-polar-view.c:736 ../src/gtk-sat-map.c:791
 msgid "Next: N/A"
@@ -370,12 +377,12 @@ msgstr ""
 #: ../src/gtk-polar-view.c:1782
 #, c-format
 msgid "LOS in %02d:%02d:%02d"
-msgstr ""
+msgstr "Μη ορατός σε %02d:%02d:%02d"
 
 #: ../src/gtk-polar-view.c:1786
 #, c-format
 msgid "LOS in %02d:%02d"
-msgstr ""
+msgstr "Μη ορατός σε %02d:%02d"
 
 #. show track
 #: ../src/gtk-polar-view-popup.c:118
@@ -384,7 +391,7 @@ msgstr ""
 
 #: ../src/gtk-rig-ctrl.c:465
 msgid "<b> Downlink </b>"
-msgstr ""
+msgstr "<b> Λήψη </b>"
 
 #. Downlink doppler
 #. Uplink doppler
@@ -404,7 +411,7 @@ msgstr ""
 
 #: ../src/gtk-rig-ctrl.c:532
 msgid "<b> Uplink </b>"
-msgstr ""
+msgstr "<b> Εκπομπή </b>"
 
 #: ../src/gtk-rig-ctrl.c:613 ../src/gtk-rot-ctrl.c:508
 msgid "Select target object"
@@ -413,7 +420,7 @@ msgstr ""
 #. tracking button
 #: ../src/gtk-rig-ctrl.c:618 ../src/gtk-rot-ctrl.c:514
 msgid "Track"
-msgstr ""
+msgstr "Κλείδωμα"
 
 #: ../src/gtk-rig-ctrl.c:620
 msgid ""
@@ -421,15 +428,18 @@ msgid ""
 "Enabling this button will apply Doppler correction to the frequency of the "
 "radio."
 msgstr ""
+"Κλείδωμα στον μεταδότη του δορυφόρου.\n"
+"Ενεργοποιώντας αυτό το κουμπί θα ρυθμίζεται η απόκλιση συχνότητας (Doppler) "
+"στον δέκτη."
 
 #: ../src/gtk-rig-ctrl.c:628
 msgid "Select a transponder"
-msgstr ""
+msgstr "Επέλεξε μεταδότη"
 
 #. buttons
 #: ../src/gtk-rig-ctrl.c:636
 msgid "T"
-msgstr ""
+msgstr "Σ"
 
 #: ../src/gtk-rig-ctrl.c:638
 msgid ""
@@ -437,6 +447,9 @@ msgid ""
 "the center of the transponder passband. In case of beacons, only the "
 "downlink will be tuned to the beacon frequency."
 msgstr ""
+"Συντονίζει την ραδιοσυσκευή στον μεταδότη. Η εκπομπή και η λήψη θα "
+"ρυθμιστούν στο κέντρο της συχνότητας του μεταδότη. Σε περίπτωση σήματος "
+"φάρου  θα συντονιστεί μόνο η λήψη."
 
 #: ../src/gtk-rig-ctrl.c:645
 msgid "L"
@@ -467,21 +480,23 @@ msgstr ""
 #. Range
 #: ../src/gtk-rig-ctrl.c:684
 msgid " Range:"
-msgstr ""
+msgstr " Απόσταση:"
 
 #: ../src/gtk-rig-ctrl.c:692 ../src/gtk-rig-ctrl.c:695
 msgid "This is the current distance between the satellite and the observer."
 msgstr ""
+"Αυτή είναι η τρέχουσα απόσταση μεταξύ του δορυφόρου και του παρατηρητή."
 
 #. Range rate
 #: ../src/gtk-rig-ctrl.c:699
 msgid " Rate:"
-msgstr ""
+msgstr " Ρυθμός:"
 
 #: ../src/gtk-rig-ctrl.c:707 ../src/gtk-rig-ctrl.c:710
 msgid ""
 "The rate of change for the distance between the satellite and the observer."
 msgstr ""
+"Ο ρυθμός μεταβολής της απόστασης μεταξύ του δορυφόρου και του παρατηρητή."
 
 #: ../src/gtk-rig-ctrl.c:713 ../src/gtk-rot-ctrl.c:547
 msgid "Target"
@@ -490,13 +505,15 @@ msgstr ""
 #. Primary device
 #: ../src/gtk-rig-ctrl.c:737
 msgid "1. Device:"
-msgstr ""
+msgstr "1. Συσκευή:"
 
 #: ../src/gtk-rig-ctrl.c:743
 msgid ""
 "Select primary radio device.This device will be used for downlink and uplink "
 "unless you select a secondary device for uplink"
 msgstr ""
+"Επιλέξτε την πρωτεύουσα ραδιοσυσκευή. Αυτή η συσκευή θα χρησιμοποιηθεί για "
+"εκπομπή και για λήψη εκτός και αν οριστεί δευτερεύουσα συσκευή για εκπομπή."
 
 #: ../src/gtk-rig-ctrl.c:786 ../src/gtk-rig-ctrl.c:835
 #: ../src/gtk-rig-ctrl.c:2773 ../src/gtk-rot-ctrl.c:616
@@ -510,13 +527,15 @@ msgstr ""
 #. Secondary device
 #: ../src/gtk-rig-ctrl.c:800
 msgid "2. Device:"
-msgstr ""
+msgstr "2. Συσκευή:"
 
 #: ../src/gtk-rig-ctrl.c:806
 msgid ""
 "Select secondary radio device\n"
 "This device will be used for uplink"
 msgstr ""
+"Δευτερεύουσα ραδιοσυσκευή\n"
+"Η συσκευή αυτή θα χρησιμοποιηθεί για εκπομπή"
 
 #. load config
 #: ../src/gtk-rig-ctrl.c:810 ../src/sat-pref-rig.c:822
@@ -527,20 +546,21 @@ msgstr ""
 #. Engage button
 #: ../src/gtk-rig-ctrl.c:849 ../src/gtk-rot-ctrl.c:630
 msgid "Engage"
-msgstr ""
+msgstr "Σύνδεση"
 
 #: ../src/gtk-rig-ctrl.c:851
 msgid "Engage the selected radio device"
-msgstr ""
+msgstr "Σύνδεση στην επιλεγμένη ραδιοσυσκευή"
 
 #. Timeout
 #: ../src/gtk-rig-ctrl.c:860 ../src/gtk-rot-ctrl.c:638
 msgid "Cycle:"
-msgstr ""
+msgstr "Σύνδεση:"
 
 #: ../src/gtk-rig-ctrl.c:867
 msgid "This parameter controls the delay between commands sent to the rig."
 msgstr ""
+"Η παράμετρος αυτή ορίζει κάθε πότε θα στέλνονται δεδομένα στην ραδιοσυσκευή."
 
 #: ../src/gtk-rig-ctrl.c:875 ../src/gtk-rot-ctrl.c:653
 msgid "msec"
@@ -548,7 +568,7 @@ msgstr ""
 
 #: ../src/gtk-rig-ctrl.c:879 ../src/gtk-rot-ctrl.c:683
 msgid "Settings"
-msgstr ""
+msgstr "Ρυθμίσεις"
 
 #: ../src/gtk-rig-ctrl.c:895
 msgid "<span size='large'><b>ΔT: 00:00:00</b></span>"
@@ -647,12 +667,12 @@ msgstr ""
 #: ../src/gtk-rig-ctrl.c:2638
 #, c-format
 msgid "AOS in"
-msgstr ""
+msgstr "Ορατό σε"
 
 #: ../src/gtk-rig-ctrl.c:2643
 #, c-format
 msgid "LOS in"
-msgstr ""
+msgstr "Μη ορατό σε"
 
 #: ../src/gtk-rig-ctrl.c:2712
 #, c-format
@@ -769,7 +789,7 @@ msgstr ""
 #: ../src/gtk-rot-ctrl.c:417 ../src/gtk-sat-list.c:89
 #: ../src/gtk-single-sat.c:57 ../src/sat-pass-dialogs.c:127
 msgid "Azimuth"
-msgstr ""
+msgstr "Αζιμούθιο"
 
 #: ../src/gtk-rot-ctrl.c:429
 msgid "Read:"
@@ -778,7 +798,7 @@ msgstr ""
 #: ../src/gtk-rot-ctrl.c:454 ../src/gtk-sat-list.c:90
 #: ../src/gtk-single-sat.c:58 ../src/sat-pass-dialogs.c:128
 msgid "Elevation"
-msgstr ""
+msgstr "Ανύψωση"
 
 #: ../src/gtk-rot-ctrl.c:466
 msgid "Read: "
@@ -795,15 +815,15 @@ msgstr ""
 
 #: ../src/gtk-rot-ctrl.c:570
 msgid "Device:"
-msgstr ""
+msgstr "Συσκευή:"
 
 #: ../src/gtk-rot-ctrl.c:576
 msgid "Select antenna rotator device"
-msgstr ""
+msgstr "Επιλογή ρότορα κεραίας"
 
 #: ../src/gtk-rot-ctrl.c:632
 msgid "Engage the selected rotor device"
-msgstr ""
+msgstr "Ενεργοποίηση του επιλεγμένου ρότορα"
 
 #: ../src/gtk-rot-ctrl.c:645
 msgid "This parameter controls the delay between commands sent to the rotator."
@@ -812,7 +832,7 @@ msgstr ""
 #. Tolerance
 #: ../src/gtk-rot-ctrl.c:658
 msgid "Tolerance:"
-msgstr ""
+msgstr "Ανοχή:"
 
 #: ../src/gtk-rot-ctrl.c:666
 msgid ""
@@ -845,7 +865,7 @@ msgstr ""
 #: ../src/gtk-sat-module-popup.c:947 ../src/gtk-sat-module-popup.c:1027
 #: ../src/sat-log-browser.c:63 ../src/sat-log.c:63 ../src/sat-pref-rig.c:791
 msgid "ERROR"
-msgstr ""
+msgstr "ΣΦΑΛΜΑ"
 
 #: ../src/gtk-rot-ctrl.c:1229
 #, c-format
@@ -899,7 +919,7 @@ msgstr ""
 
 #: ../src/gtk-sat-list.c:55 ../src/gtk-sat-tree.c:213
 msgid "Satellite"
-msgstr ""
+msgstr "Δορυφόρος"
 
 #: ../src/gtk-sat-list.c:56 ../src/gtk-sat-selector.c:301
 #: ../src/gtk-sat-tree.c:222 ../src/mod-cfg.c:563
@@ -921,7 +941,7 @@ msgstr ""
 #: ../src/gtk-sat-list.c:62 ../src/pass-to-txt.c:53
 #: ../src/sat-pass-dialogs.c:107
 msgid "Range"
-msgstr ""
+msgstr "Απόσταση"
 
 #: ../src/gtk-sat-list.c:63 ../src/sat-pass-dialogs.c:108
 msgid "Rate"
@@ -1008,7 +1028,7 @@ msgstr ""
 
 #: ../src/gtk-sat-list.c:87
 msgid "Satellite Name"
-msgstr ""
+msgstr "Όνομα Δορυφόρου"
 
 #: ../src/gtk-sat-list.c:88
 msgid "Catalogue Number"
@@ -1058,12 +1078,12 @@ msgstr ""
 #: ../src/gtk-sat-list.c:103 ../src/gtk-single-sat.c:71 ../src/qth-editor.c:333
 #: ../src/sat-pass-dialogs.c:137 ../src/sat-pref-qth-editor.c:318
 msgid "Altitude"
-msgstr ""
+msgstr "Υψόμετρο"
 
 #: ../src/gtk-sat-list.c:104 ../src/gtk-single-sat.c:72
 #: ../src/sat-pass-dialogs.c:138
 msgid "Velocity"
-msgstr ""
+msgstr "Ταχύτητα"
 
 #: ../src/gtk-sat-list.c:105 ../src/gtk-single-sat.c:101
 #: ../src/sat-pass-dialogs.c:139
@@ -1457,7 +1477,7 @@ msgstr ""
 
 #: ../src/gtk-sat-module-popup.c:131
 msgid "Exit full screen"
-msgstr ""
+msgstr "Έξοδος από πλήρη οθόνη"
 
 #: ../src/gtk-sat-module-popup.c:141
 msgid "Full screen"
@@ -1471,7 +1491,7 @@ msgstr ""
 #. select satellite submenu
 #: ../src/gtk-sat-module-popup.c:162
 msgid "Select satellite"
-msgstr ""
+msgstr "Επιλογή δορυφόρου"
 
 #. sky at a glance
 #: ../src/gtk-sat-module-popup.c:188
@@ -1486,7 +1506,7 @@ msgstr ""
 #. Radio Control
 #: ../src/gtk-sat-module-popup.c:211
 msgid "Radio Control"
-msgstr ""
+msgstr "Έλεγχος ραδιοσυσκευής"
 
 #. Antenna Control
 #: ../src/gtk-sat-module-popup.c:220
@@ -1598,7 +1618,7 @@ msgstr ""
 #: ../src/gtk-sat-module-popup.c:955
 #, c-format
 msgid "Gpredict Radio Control: %s"
-msgstr ""
+msgstr "Gpredict Έλεγχος ραδιοσυσκευής: %s"
 
 #: ../src/gtk-sat-module-popup.c:1023
 msgid ""
@@ -1746,7 +1766,7 @@ msgstr ""
 
 #: ../src/gtk-sat-selector.c:292
 msgid "Available Satellites"
-msgstr ""
+msgstr "Διαθέσιμοι Δορυφόροι"
 
 #: ../src/gtk-sat-selector.c:310
 msgid "Updated"
@@ -1770,7 +1790,7 @@ msgstr ""
 
 #: ../src/gtk-sat-selector.c:418
 msgid "All satellites"
-msgstr ""
+msgstr "Όλοι οι δορυφόροι"
 
 #: ../src/gtk-sat-selector.c:425
 #, c-format
@@ -1920,11 +1940,11 @@ msgstr ""
 
 #: ../src/gtk-single-sat.c:85
 msgid "Azimuth of the satellite"
-msgstr ""
+msgstr "Αζιμούθιο του δορυφόρου"
 
 #: ../src/gtk-single-sat.c:86
 msgid "Elevation of the satellite"
-msgstr ""
+msgstr "Ανύψωση του δορυφόρου"
 
 #: ../src/gtk-single-sat.c:87
 msgid "Direction of the satellite"
@@ -1976,11 +1996,11 @@ msgstr ""
 
 #: ../src/gtk-single-sat.c:99
 msgid "Altitude of the satellite"
-msgstr ""
+msgstr "Υψόμετρο του δορυφόρου"
 
 #: ../src/gtk-single-sat.c:100
 msgid "Tangential velocity of the satellite"
-msgstr ""
+msgstr "Εφαπτομενική ταχύτητα του δορυφόρου"
 
 #: ../src/gtk-single-sat.c:102
 msgid "Signal loss @ 100MHz"
@@ -2211,7 +2231,7 @@ msgstr ""
 
 #: ../src/map-selector.c:92
 msgid "Image files"
-msgstr ""
+msgstr "Αρχεία εικόνων"
 
 #: ../src/map-selector.c:187 ../src/map-selector.c:245
 #, c-format
@@ -2220,7 +2240,7 @@ msgstr ""
 
 #: ../src/menubar.c:77
 msgid "_File"
-msgstr ""
+msgstr "_Αρχείο"
 
 #: ../src/menubar.c:78
 msgid "_Edit"
@@ -2269,7 +2289,7 @@ msgstr ""
 
 #: ../src/menubar.c:92
 msgid "Exit the program"
-msgstr ""
+msgstr "Έξοδος από το πρόγραμμα"
 
 #. Edit menu
 #: ../src/menubar.c:95 ../src/menubar.c:98
@@ -2379,8 +2399,9 @@ msgid "Transponder Update"
 msgstr ""
 
 #: ../src/menubar.c:407
+#, fuzzy
 msgid "<b>Updating transponder files from network</b>"
-msgstr ""
+msgstr "<b>Ενημερώνω τα αρχεία TLE από το διαδίκτυο</b>"
 
 #. statistics
 #. label2 = gtk_label_new(_("Transponders updated:\t 0\n"));
@@ -2399,7 +2420,7 @@ msgstr ""
 
 #: ../src/menubar.c:493
 msgid "<b>Updating TLE files from network</b>"
-msgstr ""
+msgstr "<b>Ενημερώνω τα αρχεία TLE από το διαδίκτυο</b>"
 
 #. statistics
 #: ../src/menubar.c:506 ../src/menubar.c:663
@@ -2422,7 +2443,7 @@ msgstr ""
 #. create the dalog
 #: ../src/menubar.c:599
 msgid "Update TLE from files"
-msgstr ""
+msgstr "Ενημέρωση των TLE από αρχεία"
 
 #: ../src/menubar.c:626
 #, c-format
@@ -2431,7 +2452,7 @@ msgstr ""
 
 #: ../src/menubar.c:650
 msgid "<b>Updating TLE files from files</b>"
-msgstr ""
+msgstr "<b>Ενημερώνω τα αρχεία TLE από αρχεία</b>"
 
 #: ../src/menubar.c:716
 msgid ""
@@ -2538,7 +2559,7 @@ msgstr ""
 
 #: ../src/mod-cfg.c:487
 msgid "<b>Satellites</b>"
-msgstr ""
+msgstr "<b>Δορυφόροι</b>"
 
 #: ../src/mod-cfg.c:505
 msgid "Add satellite to list of selected satellites."
@@ -2556,7 +2577,7 @@ msgstr ""
 
 #: ../src/mod-cfg.c:555
 msgid "Selected Satellites"
-msgstr ""
+msgstr "Επιλεγμένοι Δορυφόροι"
 
 #: ../src/mod-cfg.c:674 ../src/mod-cfg.c:947
 #, c-format
@@ -3233,7 +3254,7 @@ msgstr ""
 
 #: ../src/sat-info.c:95
 msgid "<b>Satellite name:</b>"
-msgstr ""
+msgstr "<b>Όνομα δορυφόρου:</b>"
 
 #: ../src/sat-info.c:100
 #, c-format
@@ -3353,7 +3374,7 @@ msgstr ""
 #. create dialog window with NULL parent
 #: ../src/sat-info.c:330
 msgid "Satellite Info"
-msgstr ""
+msgstr "Πληροφορίες Δορυφόρου"
 
 #: ../src/sat-info.c:436
 msgid "No transponders"
@@ -3549,7 +3570,7 @@ msgstr ""
 
 #: ../src/sat-pass-dialogs.c:78
 msgid "Maximum elevation"
-msgstr ""
+msgstr "Μέγιστη ανύψωση"
 
 #: ../src/sat-pass-dialogs.c:79
 msgid "Azimuth at AOS"
@@ -3641,7 +3662,7 @@ msgstr ""
 #. minimum elevation
 #: ../src/sat-pref-conditions.c:75
 msgid "Minimum elevation"
-msgstr ""
+msgstr "Ελάχιστη ανύψωση"
 
 #: ../src/sat-pref-conditions.c:84
 msgid ""
@@ -3713,7 +3734,7 @@ msgstr ""
 
 #: ../src/sat-pref-conditions.c:265
 msgid "<b>Satellite Visibility:</b>"
-msgstr ""
+msgstr "<b>Ορατότητα Δορυφόρου:</b>"
 
 #. twilight threshold
 #: ../src/sat-pref-conditions.c:274
@@ -4118,7 +4139,7 @@ msgstr ""
 #. satellite
 #: ../src/sat-pref-map-view.c:413 ../src/sat-pref-polar-view.c:425
 msgid "Satellite:"
-msgstr ""
+msgstr "Δορυφόρος:"
 
 #: ../src/sat-pref-map-view.c:422 ../src/sat-pref-polar-view.c:434
 msgid "Click to select satellite colour"
@@ -5549,9 +5570,9 @@ msgid "%s: Error writing transponder data to %s"
 msgstr ""
 
 #: ../src/trsp-conf.c:247
-#, c-format
+#, fuzzy, c-format
 msgid "Wrote %d transmponders to %s"
-msgstr ""
+msgstr "Ενημέρωση των TLE από αρχεία"
 
 #: ../src/trsp-update.c:222
 #, c-format
@@ -5583,5 +5604,18 @@ msgid "%s: A frequency update process is already running"
 msgstr ""
 
 #: ../src/trsp-update.c:523
+#, fuzzy
 msgid "Ready to fetch transponder list from satnogs"
-msgstr ""
+msgstr "Ενημέρωση των TLE από αρχεία"
+
+#, fuzzy
+#~ msgid "Update transponders from local files"
+#~ msgstr "Ενημέρωση των TLE από αρχεία"
+
+#, fuzzy
+#~ msgid "Select transponder directory:"
+#~ msgstr "Επέλεξε μεταδότη"
+
+#, fuzzy
+#~ msgid "<b>Updating transponders files from files</b>"
+#~ msgstr "<b>Ενημερώνω τα αρχεία TLE από αρχεία</b>"

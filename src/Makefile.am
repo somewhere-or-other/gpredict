@@ -19,6 +19,7 @@ AM_CPPFLAGS = \
 bin_PROGRAMS = gpredict
 
 gpredict_SOURCES = \
+	nxjson/nxjson.c nxjson/nxjson.h \
     sgpsdp/sgp4sdp4.c \
     sgpsdp/sgp4sdp4.h \
     sgpsdp/sgp_in.c \
@@ -76,6 +77,7 @@ gpredict_SOURCES = \
     radio-conf.c radio-conf.h \
     rotor-conf.c rotor-conf.h \
     trsp-conf.c trsp-conf.h \
+    trsp-update.c trsp-update.h \
     sat-cfg.c sat-cfg.h \
     sat-info.c sat-info.h \
     sat-log.c sat-log.h \

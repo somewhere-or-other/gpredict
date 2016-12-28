@@ -1,7 +1,7 @@
 /*
     Gpredict: Real-time satellite tracking and orbit prediction program
 
-    Copyright (C)  2001-2009  Alexandru Csete.
+    Copyright (C)  2001-2016  Alexandru Csete.
 
     Authors: Alexandru Csete <oz9aec@gmail.com>
 
@@ -25,11 +25,11 @@
     along with this program; if not, visit http://www.fsf.org/
  
 */
-
-#include <gtk/gtk.h>
 #include <glib/gi18n.h>
+#include <gtk/gtk.h>
 
 #include "compat.h"
+#include "gpredict-utils.h"
 #include "sat-log.h"
 #include "trsp-conf.h"
 
@@ -39,14 +39,38 @@
 #define KEY_DOWN_HIGH   "DOWN_HIGH"
 #define KEY_INVERT      "INVERT"
 #define KEY_MODE        "MODE"
+#define KEY_BAUD        "BAUD"
+
+static void check_trsp_freq(trsp_t * trsp)
+{
+    /* ensure we don't have any negative frequencies */
+    if (trsp->downlow < 0)
+        trsp->downlow = 0;
+    if (trsp->downhigh < 0)
+        trsp->downhigh = 0;
+    if (trsp->uplow < 0)
+        trsp->uplow = 0;
+    if (trsp->uphigh < 0)
+        trsp->uphigh = 0;
+
+    if (trsp->downlow == 0 && trsp->downhigh > 0)
+        trsp->downlow = trsp->downhigh;
+    else if (trsp->downhigh == 0 && trsp->downlow > 0)
+        trsp->downhigh = trsp->downlow;
+
+    if (trsp->uplow == 0 && trsp->uphigh > 0)
+        trsp->uplow = trsp->uphigh;
+    else if (trsp->uphigh == 0 && trsp->uplow > 0)
+        trsp->uphigh = trsp->uplow;
+}
 
 /**
  * Read transponder data file.
  * 
- * \param catnum The catalog number of the satellite to read transponders for.
- * \return  The new transponder list.
+ * @param catnum The catalog number of the satellite to read transponders for.
+ * @return  The new transponder list.
  */
-GSList         *read_transponders(guint catnum)
+GSList *read_transponders(guint catnum)
 {
     GSList         *trsplist = NULL;
     trsp_t         *trsp;
@@ -93,7 +117,7 @@ GSList         *read_transponders(guint catnum)
         if (G_UNLIKELY(trsp == NULL))
         {
             sat_log_log(SAT_LOG_LEVEL_ERROR,
-                        _("%s: Failed to allocate memory for transponder data"),
+                        _("%s: Failed to allocate memory for trsp data"),
                         __func__);
             goto done;
         }
@@ -101,60 +125,66 @@ GSList         *read_transponders(guint catnum)
         /* read transponder data */
         trsp->name = g_strdup(groups[i]);
 
-        trsp->uplow = g_key_file_get_double(cfg, groups[i], KEY_UP_LOW, &error);
+        trsp->uplow = g_key_file_get_int64(cfg, groups[i], KEY_UP_LOW, &error);
         if (error != NULL)
         {
             sat_log_log(SAT_LOG_LEVEL_INFO, INFO_MSG, __func__, KEY_UP_LOW,
                         name, groups[i]);
             g_clear_error(&error);
-            trsp->uplow = 0.0;
         }
 
-        trsp->uphigh = g_key_file_get_double(cfg, groups[i], KEY_UP_HIGH,
+        trsp->uphigh = g_key_file_get_int64(cfg, groups[i], KEY_UP_HIGH,
+                                            &error);
+        if (error != NULL)
+        {
+            sat_log_log(SAT_LOG_LEVEL_INFO, INFO_MSG, __func__, KEY_UP_HIGH,
+                        name, groups[i]);
+            g_clear_error(&error);
+        }
+
+        trsp->downlow = g_key_file_get_int64(cfg, groups[i], KEY_DOWN_LOW,
                                              &error);
         if (error != NULL)
         {
-            sat_log_log(SAT_LOG_LEVEL_INFO, INFO_MSG, __func__, KEY_UP_HIGH,
+            sat_log_log(SAT_LOG_LEVEL_INFO, INFO_MSG, __func__, KEY_DOWN_LOW,
                         name, groups[i]);
             g_clear_error(&error);
-            trsp->uphigh = trsp->uplow;
         }
 
-        trsp->downlow = g_key_file_get_double(cfg, groups[i],
-                                              KEY_DOWN_LOW, &error);
-        if (error != NULL)
-        {
-            sat_log_log(SAT_LOG_LEVEL_INFO, INFO_MSG, __func__, KEY_UP_HIGH,
-                        name, groups[i]);
-            g_clear_error(&error);
-            trsp->downlow = 0.0;
-        }
-
-        trsp->downhigh = g_key_file_get_double(cfg, groups[i], KEY_DOWN_HIGH,
-                                               &error);
+        trsp->downhigh = g_key_file_get_int64(cfg, groups[i], KEY_DOWN_HIGH,
+                                              &error);
         if (error != NULL)
         {
             sat_log_log(SAT_LOG_LEVEL_INFO, INFO_MSG, __func__, KEY_DOWN_HIGH,
                         name, groups[i]);
             g_clear_error(&error);
-            trsp->downhigh = trsp->downlow;
         }
+
+        /* check data to ensure consistency */
+        check_trsp_freq(trsp);
 
         trsp->invert = g_key_file_get_boolean(cfg, groups[i],
                                               KEY_INVERT, &error);
         if (error != NULL)
         {
-            sat_log_log(SAT_LOG_LEVEL_INFO, INFO_MSG, __func__, KEY_DOWN_HIGH,
+            sat_log_log(SAT_LOG_LEVEL_INFO, INFO_MSG, __func__, KEY_INVERT,
                         name, groups[i]);
             g_clear_error(&error);
             trsp->invert = FALSE;
         }
 
-        trsp->mode = g_key_file_get_string(cfg, groups[i],
-                                           KEY_MODE, &error);
+        trsp->mode = g_key_file_get_string(cfg, groups[i], KEY_MODE, &error);
         if (error != NULL)
         {
-            sat_log_log(SAT_LOG_LEVEL_INFO, INFO_MSG, __func__, KEY_DOWN_HIGH,
+            sat_log_log(SAT_LOG_LEVEL_INFO, INFO_MSG, __func__, KEY_MODE,
+                        name, groups[i]);
+            g_clear_error(&error);
+        }
+
+        trsp->baud = g_key_file_get_double(cfg, groups[i], KEY_BAUD, &error);
+        if (error != NULL)
+        {
+            sat_log_log(SAT_LOG_LEVEL_INFO, INFO_MSG, __func__, KEY_BAUD,
                         name, groups[i]);
             g_clear_error(&error);
         }
@@ -163,7 +193,7 @@ GSList         *read_transponders(guint catnum)
         trsplist = g_slist_append(trsplist, trsp);
     }
 
-done:
+  done:
     g_strfreev(groups);
     g_key_file_free(cfg);
     g_free(name);
@@ -173,23 +203,81 @@ done:
 }
 
 /**
- * Write transponder list for satellite.
- * \param catnum The catlog number of the satellite.
- * \param trsplist Pointer to a GSList of trsp_t structures.
+ * Write transponder list to file.
+ *
+ * @param catnum The catalog number of the satellite.
+ * @param trsplist Pointer to a GSList of trsp_t structures.
+ *
+ * The transponder list is written to a file called "catnum.trsp". If the file
+ * already exists, its contents will be deleted.
  */
-void write_transponders(guint catnum, GSList * trsplist)
+void write_transponders(guint catnum, GSList * trsp_list)
 {
-    // FIXME
-    (void)catnum;               /* avoid unused parameter compiler warning */
-    (void)trsplist;             /* avoid unused parameter compiler warning */
-    sat_log_log(SAT_LOG_LEVEL_ERROR, _("%s: Not implemented!"), __func__);
+    trsp_t         *trsp;
+    GKeyFile       *trsp_data = NULL;
+    gchar          *file_name;
+    gchar          *trsp_file;
+    gint            i, n, trsp_written;
+
+    file_name = g_strdup_printf("%d.trsp", catnum);
+    trsp_file = trsp_file_name(file_name);
+    trsp_data = g_key_file_new();
+    trsp_written = 0;
+
+    n = g_slist_length(trsp_list);
+    for (i = 0; i < n; i++)
+    {
+        trsp = (trsp_t *) g_slist_nth_data(trsp_list, i);
+        if (!trsp->name)
+        {
+            sat_log_log(SAT_LOG_LEVEL_ERROR,
+                        _("%s: Skipping transponder at index %d (no name)"),
+                        __func__, i);
+            continue;
+        }
+
+        if (trsp->uplow > 0)
+            g_key_file_set_int64(trsp_data, trsp->name, KEY_UP_LOW,
+                                 trsp->uplow);
+        if (trsp->uphigh > 0)
+            g_key_file_set_int64(trsp_data, trsp->name, KEY_UP_HIGH,
+                                 trsp->uphigh);
+        if (trsp->downlow > 0)
+            g_key_file_set_int64(trsp_data, trsp->name, KEY_DOWN_LOW,
+                                 trsp->downlow);
+        if (trsp->downhigh > 0)
+            g_key_file_set_int64(trsp_data, trsp->name, KEY_DOWN_HIGH,
+                                 trsp->downhigh);
+        if (trsp->baud > 0.0)
+            g_key_file_set_double(trsp_data, trsp->name, KEY_BAUD, trsp->baud);
+        if (trsp->invert)
+            g_key_file_set_boolean(trsp_data, trsp->name, KEY_INVERT, TRUE);
+        if (trsp->mode)
+            g_key_file_set_string(trsp_data, trsp->name, KEY_MODE, trsp->name);
+    }
+
+    if (gpredict_save_key_file(trsp_data, trsp_file))
+    {
+        sat_log_log(SAT_LOG_LEVEL_ERROR,
+                    _("%s: Error writing transponder data to %s"),
+                    __func__, file_name);
+    }
+    else
+    {
+        sat_log_log(SAT_LOG_LEVEL_INFO,
+                    _("Wrote %d transmponders to %s"),
+                    trsp_written, trsp_file_name);
+    }
+
+    g_key_file_free(trsp_data);
+    g_free(file_name);
+    g_free(trsp_file);
 }
 
 /**
  * Free transponder list.
- * \param trsplist Pointer to a GSList of trsp_t structures.
  *
- * This functions free all memory occupied by the transponder list.
+ * @param trsplist Pointer to a GSList of trsp_t structures.
  */
 void free_transponders(GSList * trsplist)
 {
@@ -201,9 +289,9 @@ void free_transponders(GSList * trsplist)
     {
         trsp = (trsp_t *) g_slist_nth_data(trsplist, i);
         g_free(trsp->name);
-        g_free(trsp);
         if (trsp->mode)
             g_free(trsp->mode);
+        g_free(trsp);
     }
     g_slist_free(trsplist);
     trsplist = NULL;
